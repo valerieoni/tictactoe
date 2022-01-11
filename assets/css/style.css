@@ -2,34 +2,51 @@
 
 *, *::before, *::after {
     box-sizing: border-box;
-    user-select: none;
+    margin: 0;
+    padding: 0;
 }
 
 body {
     font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+    font-size: 3rem;
+    color: green;
+}
+.game {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-}
-.game {
-   text-align: center;
+    text-align: center;
+    gap: 20px
 }
 
 .game-board {
-    display: grid;
-    grid-template-columns: repeat(3, auto);
-    width: 306px;
+    width: 450px;
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
 }
 
 .cell {
-    font-family: "Permanent Marker", cursive;
-    width: 100px;
-    height: 100px;
-    box-shadow: 0 0 0 1px #333333;
-    border: 1px solid #333333;
-    cursor: pointer;
-    line-height: 100px;
-    font-size: 60px;
+   height: 150px;
+   width: 150px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   font-family: "Permanent Marker", cursive;
+   font-size: 6rem;
+   border-right: solid 2px rgb(55, 55, 56);
+   border-bottom: solid 2px rgb(55, 55, 56);
+}
+
+.cell:nth-child(3), .cell:nth-child(6), .cell:nth-child(9) {
+    border-right: none;
+}
+
+.cell:nth-child(7), .cell:nth-child(8), .cell:nth-child(9) {
+    border-bottom: none;
 }
