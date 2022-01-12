@@ -81,10 +81,10 @@ function clearBoard()
  */
 function updateStatus()
 {
-   if (gameWon()) {
-    
+   if (gameWon()) { 
     endGame(current_player + ' has won!');
-   
+   } else if(!board.some((elts) => elts === null)) {
+    endGame(`It's a DRAW!!!`);
    }
 }
 
@@ -100,6 +100,10 @@ function gameWon()
     }
 }
 
+function boardFilled()
+{
+
+}
 /**
  * Prevents player from making another move.
  * When a ends as a result of a win or draw,
