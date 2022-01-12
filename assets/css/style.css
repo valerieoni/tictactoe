@@ -50,3 +50,9 @@ h1 {
 .cell:nth-child(7), .cell:nth-child(8), .cell:nth-child(9) {
     border-bottom: none;
 }
+
+.game__restart {
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 2rem
+}
