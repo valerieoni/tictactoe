@@ -1,4 +1,4 @@
-
+let intro = "Click to play";
 let board;
 let board_size = 3;
 const WINNING_SET = [
@@ -64,6 +64,7 @@ function resetGame()
         startGame();
     }
     clearBoard();
+    document.getElementById('game_status').innerText = intro;
     cells.forEach((cell) => cell.addEventListener('click', markCell));
 }
 
@@ -81,8 +82,9 @@ function clearBoard()
 function updateStatus()
 {
    if (gameWon()) {
-    endGame();
-    alert(current_player + ' has won!');
+    
+    endGame(current_player + ' has won!');
+   
    }
 }
 
@@ -104,12 +106,18 @@ function gameWon()
  * the event listener on the boxes are removed
  * and player can continue playing by clicking on the restart button.
  */
-function endGame()
+function endGame(message)
 {
     cells.forEach((cell) => cell.removeEventListener('click', markCell));
+    let elt = document.getElementById('game_status');
+    elt.innerText = message;
+    console.log(message);
 }
 
 document.addEventListener("DOMContentLoaded", function() {
     startGame();
     cells.forEach((cell) => cell.addEventListener('click', markCell));
+
+    let restart_button = document.getElementById('restart_game');
+    restart_button.addEventListener('click', resetGame);
 });
