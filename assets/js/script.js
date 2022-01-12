@@ -115,7 +115,6 @@ function endGame(message)
     cells.forEach((cell) => cell.removeEventListener('click', markCell));
     let elt = document.getElementById('game_status');
     elt.innerText = message;
-    console.log(message);
 }
 
 document.addEventListener("DOMContentLoaded", function() {
