@@ -1,6 +1,7 @@
 let intro = "Click to play";
 let board;
 let board_size = 3;
+let board_name = '';
 const WINNING_SET = [
     [0, 1, 2],
     [3, 4, 5],
@@ -21,16 +22,26 @@ const WINNING_SET = [
 let min_moves = (board_size * 2) - 1;
 let moves = 0;
 let cells = document.querySelectorAll('.cell');
+
 let players = {
-    x : 'X',
-    o : 'O'
+    x : {
+        marker: 'X',
+        score: 0,
+        moves: []
+    },
+    o : {
+        marker: 'O',
+        score: 0,
+        moves: []
+    }
 }
+let ties = 0;
 
 let current_player = players.o;
 
 let PLAY_ON = true;
 let WINNER_FOUND = false;
-let GAME_DRAW = false;
+let game_draw = false;
 
 /**
  * Set the value on the cell to the current player if empty.
@@ -40,11 +51,12 @@ function markCell() {
     let div = this;
     let idx = div.getAttribute("data-cell-index");
     if (board[idx] === null) {
-        board[idx] = current_player;
-        div.innerText = current_player;
+        board[idx] = current_player.marker;
+        div.innerText = current_player.marker;
         moves++;
         updateStatus();
         current_player = current_player === players.o ? players.x : players.o;
+
     }
 }
 
@@ -81,18 +93,35 @@ function clearBoard()
  */
 function updateStatus()
 {
-   if (gameWon()) { 
-    endGame(current_player + ' has won!');
+   if (gameWon()) {
+       game_draw = false;
+       updateScoreBoard(current_player);
+       endGame(current_player.marker + ' has won!');
+      
    } else if(!board.some((elts) => elts === null)) {
-    endGame(`It's a DRAW!!!`);
+        game_draw = true;
+        updateScoreBoard(current_player);
+        endGame(`It's a DRAW!!!`);
    }
+}
+
+function updateScoreBoard(current_player)
+{
+    if (game_draw) {
+        ties++;
+        document.getElementById("score_board_tie").innerText = ties;
+    } else {
+        current_player.score++;
+        board_name = current_player == players.o ? 'score_board_o' : 'score_board_x';
+        document.getElementById(board_name).innerText = current_player.score;
+    }
 }
 
 function gameWon()
 {
     if (moves >= min_moves) {
         return WINNING_SET.some((combination) => {
-            if (current_player == board[combination[0]] && board[combination[0]] == board[combination[1]] && board[combination[0]] == board[combination[2]]) {
+            if (current_player.marker == board[combination[0]] && board[combination[0]] == board[combination[1]] && board[combination[0]] == board[combination[2]]) {
                 return true;
             }
             return false;
