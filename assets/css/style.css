@@ -29,7 +29,6 @@ h1 {
 }
 
 .game-board {
-    width: 450px;
     display: flex;
     flex-wrap: wrap;
     margin-bottom: 20px;
@@ -48,14 +47,32 @@ h1 {
    border-bottom: solid 2px rgb(55, 55, 56);
 }
 
-.cell:nth-child(3), .cell:nth-child(6), .cell:nth-child(9) {
+/* 3 BY 3 GRID */
+.cell-3{
+    width: 360px;
+}
+
+.cell-3 div:nth-child(3n) {
     border-right: none;
 }
 
-.cell:nth-child(7), .cell:nth-child(8), .cell:nth-child(9) {
+.cell-3 div:nth-child(7), .cell-3 div:nth-child(8), .cell-3 div:nth-child(9) {
     border-bottom: none;
 }
 
+/* 5 BY 5 GRID */
+.cell-5{
+    width: 600px;
+}
+
+.cell-5 div:nth-child(5n) {
+    border-right: none;
+}
+
+.cell-5 div:nth-child(21), .cell-5 div:nth-child(22), 
+.cell-5 div:nth-child(23), .cell-5 div:nth-child(24), .cell-5 div:nth-child(25) {
+    border-bottom: none;
+}
 
 
 /************************************************

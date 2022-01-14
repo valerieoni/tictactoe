@@ -24,27 +24,24 @@
                 <p>Ties : <span class="score_board__span" id="score_board_tie">0</span></p>
             </div>
         </section>
-        
-        <div>
-            <div class="game-board">
-                <div data-cell-index="0" class="cell"></div>
-                <div data-cell-index="1" class="cell"></div>
-                <div data-cell-index="2" class="cell"></div>
-                <div data-cell-index="3" class="cell"></div>
-                <div data-cell-index="4" class="cell"></div>
-                <div data-cell-index="5" class="cell"></div>
-                <div data-cell-index="6" class="cell"></div>
-                <div data-cell-index="7" class="cell"></div>
-                <div data-cell-index="8" class="cell"></div>
-            </div>
+        <div class="game-board  cell-3" id="game-board">
+            <div data-cell-index="0" class="cell"></div>
+            <div data-cell-index="1" class="cell"></div>
+            <div data-cell-index="2" class="cell"></div>
+            <div data-cell-index="3" class="cell"></div>
+            <div data-cell-index="4" class="cell"></div>
+            <div data-cell-index="5" class="cell"></div>
+            <div data-cell-index="6" class="cell"></div>
+            <div data-cell-index="7" class="cell"></div>
+            <div data-cell-index="8" class="cell"></div>
         </div>
         
         <h2 id="game_status" class="game__status win">Click to play</h2>
        <div class="game_div">
         <select id="board_option" class="board_option">
             <option value="">Board size</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
+            <option value="3">3 X 3</option>
+            <option value="5">5 X 5</option>
         </select>
         <button id="restart_game" class="game__restart"><i class="fas fa-sync-alt"></i> Restart</button>
        </div>
