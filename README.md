@@ -1,10 +1,10 @@
 <h1 align="center">TIC TAC TOE</h1>
 
-[View the live project here.](#)
+[View the live project here.](https://valerieoni.github.io/tictactoe/)
 
-The site provides a simple tic tac toe game played between two players on a 3 by 3 or 4 by 4 grid.
+The site provides a simple tic tac toe game played between two players on a 3 X 3 or 5 X 5 grid.
 
-<h2 align="center"><img src="#"></h2>
+<h2 align="center"><img src="docs/screenshot.png"></h2>
 
 ## User Experience (UX)
 
@@ -31,6 +31,7 @@ The site provides a simple tic tac toe game played between two players on a 3 by
         -  have my marker symbol drawn when I click inside an empty cell
         -  know when I have won, lost or drawn the game
         -  restart the game when one ends
+        -  play a tic tac toe game on a 3X3 or 5X5 board.
 
 -   ### Design
 
