@@ -17,6 +17,8 @@ h1 {
     color: green;
 }
 
+/** GRID **/
+
 .game {
     display: flex;
     flex-direction: column;
@@ -40,7 +42,6 @@ h1 {
    align-items: center;
    justify-content: center;
    font-family: "Permanent Marker", cursive;
-   /*font-family: 'Marko One', serif;*/
    font-size: 6rem;
    border-right: solid 2px rgb(55, 55, 56);
    border-bottom: solid 2px rgb(55, 55, 56);
@@ -185,4 +186,23 @@ button {
         font-size: 1rem;
         min-width: 6.125rem;
     }
+
+    /*** GRID ***/
+
+    .cell {
+        height: 80px;
+        width: 80px;
+        font-size: 4rem;
+    }
+
+    /* 3 BY 3 GRID */
+    .cell-3{
+        width: 240px;
+    }
+
+    /* 5 BY 5 GRID */
+    .cell-5{
+        width: 400px;
+    }
+
   }
