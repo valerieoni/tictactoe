@@ -110,6 +110,7 @@ The W3C Markup Validator and W3C CSS Validator Services were used to validate ev
 
 ### Known Bugs
 - When I click restart button before a current game ends, the click event on the game mode buttons aren't triggered when clicked.
+ [Click to view ticket](https://github.com/valerieoni/tictactoe/issues/1#issue-1104767504)
 
 ## Deployment
 
