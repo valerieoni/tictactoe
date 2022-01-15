@@ -173,12 +173,17 @@ button {
 
     .right-col {
         border-left: none;
+        flex: auto;
     }
 
     .left-col {
-        flex: 2;
+        flex: auto;
     }
     
+     
+    .game-div {
+        width: 80%;
+    }
 
     /** BUTTONS **/
             
@@ -203,6 +208,27 @@ button {
     /* 5 BY 5 GRID */
     .cell-5{
         width: 400px;
+    }
+
+  }
+
+  @media screen and (max-width: 320px) {
+
+    
+    h3 {
+        font-size: 1rem;
+    }
+
+    /** SCORE BOARD **/
+    
+    .score-board p {
+        display: block;
+        width: 64px;
+        font-size: 0.875rem;
+    }
+
+    .score-board__span {
+        font-weight: 400;
     }
 
   }
