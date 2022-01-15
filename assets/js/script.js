@@ -4,8 +4,6 @@ let board_size = 0;
 let board_name = '';
 let WINNING_SET = [];
 
-    /*
-let new_array = [];
 /**
  * for a default 3 X 3 board the min moves the players can make
  * before a winner emerges is 5. the larger the board the higher the number.
@@ -28,7 +26,6 @@ let players = {
     }
 }
 let ties = 0;
-
 let current_player = players.o;
 let game_draw = false;
 let play_on =  false;
@@ -117,7 +114,7 @@ function play() {
 
 function markCell(idx, player)
 {
-    if (board[idx] === null) {
+    if (isFullBoard()) {
         document.getElementById(idx).innerText = player.marker;
         board[idx] = player.marker;
         moves++;
@@ -128,20 +125,36 @@ function markCell(idx, player)
 }
 
 /**
- * return the first available spot on the board
+ * returns a random spot from the available spots on the board
  */
 function bestMove()
 {
-    return board.indexOf(null);
+    let empty_squares = getEmptySquares();
+    return empty_squares[Math.floor(Math.random()*empty_squares.length)];
+
 }
 
+function isFullBoard()
+{
+    return getEmptySquares().length != 0;
+}
+
+function getEmptySquares()
+{
+    return board.filter(elt => typeof elt == 'number');
+}
+
+/**
+ * 
+ * @param {*} level 
+ */
 function startGame(level = 3)
 {
     setWiningSet(level);
     board_size = level;
     let size = board_size ** 2;
-    board = new Array(size).fill(null);
-    clearBoard();
+    fillBoard(size);
+   clearGameBoard();
 }
 
 function setWiningSet(level)
@@ -153,20 +166,26 @@ function setWiningSet(level)
 
 }
 
+function fillBoard(size)
+{
+    board = Array.from(Array(size).keys());
+}
+
 function resetGame()
 {
     if (Array.isArray(board) && board.length === board_size ** 2) {
-        board.fill(null);
-        clearBoard();
+        fillBoard(board_size ** 2);
+        console.log(board);
     } else {
         startGame(board_size);
     }
     document.getElementById('game_status').innerText = intro;
     cells = document.querySelectorAll('.cell');
     cells.forEach((cell) => cell.addEventListener('click', play));
+    clearGameBoard();
 }
 
-function clearBoard()
+function clearGameBoard()
 {
     cells.forEach(cell => {
         cell.innerText = '';
@@ -182,9 +201,9 @@ function updateStatus()
    if (gameWon()) {
        game_draw = false;
        updateScoreBoard(current_player);
-       endGame(current_player.marker + ' has won!');
+       endGame(current_player.marker + ' wins!!!');
 
-   } else if(!board.some((elts) => elts === null)) {
+   } else if(!isFullBoard()) {
         game_draw = true;
         updateScoreBoard(current_player);
         endGame(`It's a DRAW!!!`);
@@ -226,7 +245,7 @@ function gameWon()
  *
  * @param {int} size 
  */
-function setBoard(size)
+function setGameBoard(size)
 {
     let parent = document.getElementById("game-board");
     let lastChild = parent.lastElementChild;
@@ -284,7 +303,7 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("board_option").addEventListener('change', function(evt){
         let size = parseInt((evt.target.value));
         size = isNaN(size) ? 3 : size;
-        setBoard(size);   
+        setGameBoard(size);   
     })
 
     startGame();
