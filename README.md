@@ -61,7 +61,6 @@ The site provides a simple tic tac toe game played between two players on a 3 by
 -   Interactive elements
 
 ## Technologies Used
--   [Minimax algorithm](https://www.geeksforgeeks.org/minimax-algorithm-in-game-theory-set-1-introduction/)
 
 ### Languages Used
 
@@ -110,7 +109,7 @@ The W3C Markup Validator and W3C CSS Validator Services were used to validate ev
 -   A large amount of testing will be done to ensure that all pages were linking correctly.
 
 ### Known Bugs
-
+- When I click restart button before a current game ends, the click event on the game mode buttons aren't triggered when clicked.
 
 ## Deployment
 
