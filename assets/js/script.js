@@ -1,15 +1,15 @@
 let intro = "Click to play";
 let board;
-let board_size = 0;
-let board_name = '';
-let WINNING_SET = [];
+let boardSize = 0;
+let boardName = '';
+let winningSet = [];
 
 /**
  * for a default 3 X 3 board the min moves the players can make
  * before a winner emerges is 5. the larger the board the higher the number.
  * e.g 4 X 4 board requires a minimum of 7 moves.
  */
-let min_moves = (board_size * 2) - 1;
+let minimumMoves = (boardSize * 2) - 1;
 let moves = 0;
 let cells = document.querySelectorAll('.cell');
 
@@ -26,10 +26,10 @@ let players = {
     }
 }
 let ties = 0;
-let current_player = players.o;
-let game_draw = false;
-let play_on =  false;
-let vs_bot = false;
+let currentPlayer = players.o;
+let isTie = false;
+let playOn =  false;
+let vsBot = false;
 
 /**
  * If a game isn't already started then set the game mode
@@ -38,18 +38,18 @@ let vs_bot = false;
 function setGameMode()
 {
   let buttonClicked = this;
-  let prevMode = document.getElementsByClassName("selected_btn")[0];
+  let prevMode = document.getElementsByClassName("selected-btn")[0];
  
-  if (play_on === false && prevMode.id != buttonClicked.id) {
+  if (playOn === false && prevMode.id != buttonClicked.id) {
     playBot(buttonClicked.id);
-    prevMode.classList.remove("selected_btn");
-    buttonClicked.classList.add("selected_btn");
+    prevMode.classList.remove("selected-btn");
+    buttonClicked.classList.add("selected-btn");
   }
 }
 
-function playBot(which_player = 'human')
+function playBot(whichPlayer = 'human')
 {
-    vs_bot = which_player == 'bot';
+    vsBot = whichPlayer == 'bot';
 }
 
 /**
@@ -58,45 +58,45 @@ function playBot(which_player = 'human')
  * For example: 
  * Given a grid size of 3 it returns an 8 by 3 multi-dimensional array.
  *
- * @param int grid_size
+ * @param int gridSize
  * @returns [][]
  */
-function createWinningSet(grid_size)
+function createWinningSet(gridSize)
 {
-    let array_grid = [];
+    let arrayGrid = [];
     let row;
     
     //first possible set WA. This is named WA just for reference in the comments.
-    for (let i = 0; i<grid_size; i++) {
-        array_grid[i] = [];
-        for (let j=0; j<grid_size; j++) {
-            array_grid[i][j] = i * grid_size + j;
+    for (let i = 0; i<gridSize; i++) {
+        arrayGrid[i] = [];
+        for (let j=0; j<gridSize; j++) {
+            arrayGrid[i][j] = i * gridSize + j;
         }
         row = i;
     }
 
     //Tranpose the first set (WA) of array generated to get the next possible set
-    for (let i = 0; i < grid_size; i++) {
-        let idx = i + grid_size;
-        array_grid[idx] = [];
-        for (let j=0; j<grid_size; j++) {
-            array_grid[idx][j] = array_grid[j][i];
+    for (let i = 0; i < gridSize; i++) {
+        let idx = i + gridSize;
+        arrayGrid[idx] = [];
+        for (let j=0; j<gridSize; j++) {
+            arrayGrid[idx][j] = arrayGrid[j][i];
         }
         row = idx;
     }
     
   //last two rows are the diagnoals of the first set of array (WA) generated.
-    array_grid[row+1] = [];
-    array_grid[row+2] = [];
+    arrayGrid[row+1] = [];
+    arrayGrid[row+2] = [];
    
-    let cols = grid_size - 1;
-    for (let i =0; i<grid_size; i++) {
-        array_grid[row+1][i] = array_grid[i][i];
-        array_grid[row+2][i] = array_grid[i][cols];
+    let cols = gridSize - 1;
+    for (let i =0; i<gridSize; i++) {
+        arrayGrid[row+1][i] = arrayGrid[i][i];
+        arrayGrid[row+2][i] = arrayGrid[i][cols];
         cols--;
     }
 
-    return array_grid;
+    return arrayGrid;
 }
 
 /**
@@ -104,11 +104,11 @@ function createWinningSet(grid_size)
  * When player clicks on an empty cell the board is also updated.
  */
 function play() {
-    play_on = true;
+    playOn = true;
     let idx = this.getAttribute("data-cell-index"); 
-    markCell(idx, current_player);
-    if (vs_bot) {
-        markCell(bestMove(), current_player);
+    markCell(idx, currentPlayer);
+    if (vsBot) {
+        markCell(bestMove(), currentPlayer);
     }
 }
 
@@ -119,7 +119,7 @@ function markCell(idx, player)
         board[idx] = player.marker;
         moves++;
         updateStatus();
-        current_player = player === players.o ? players.x : players.o;
+        currentPlayer = player === players.o ? players.x : players.o;
     }
     
 }
@@ -129,8 +129,8 @@ function markCell(idx, player)
  */
 function bestMove()
 {
-    let empty_squares = getEmptySquares();
-    return empty_squares[Math.floor(Math.random()*empty_squares.length)];
+    let emptySquares = getEmptySquares();
+    return emptySquares[Math.floor(Math.random()*emptySquares.length)];
 
 }
 
@@ -151,8 +151,8 @@ function getEmptySquares()
 function startGame(level = 3)
 {
     setWiningSet(level);
-    board_size = level;
-    let size = board_size ** 2;
+    boardSize = level;
+    let size = boardSize ** 2;
     fillBoard(size);
    clearGameBoard();
 }
@@ -160,8 +160,8 @@ function startGame(level = 3)
 function setWiningSet(level)
 {
   
-    if (WINNING_SET.length !== level*2+2) {
-        WINNING_SET = createWinningSet(level);
+    if (winningSet.length !== level*2+2) {
+        winningSet = createWinningSet(level);
     }
 
 }
@@ -173,13 +173,12 @@ function fillBoard(size)
 
 function resetGame()
 {
-    if (Array.isArray(board) && board.length === board_size ** 2) {
-        fillBoard(board_size ** 2);
-        console.log(board);
+    if (Array.isArray(board) && board.length === boardSize ** 2) {
+        fillBoard(boardSize ** 2);
     } else {
-        startGame(board_size);
+        startGame(boardSize);
     }
-    document.getElementById('game_status').innerText = intro;
+    document.getElementById('game__status').innerText = intro;
     cells = document.querySelectorAll('.cell');
     cells.forEach((cell) => cell.addEventListener('click', play));
     clearGameBoard();
@@ -198,37 +197,37 @@ function clearGameBoard()
  */
 function updateStatus()
 {
-   if (gameWon()) {
-       game_draw = false;
-       updateScoreBoard(current_player);
-       endGame(current_player.marker + ' wins!!!');
+   if (isGameWon()) {
+       isTie = false;
+       updateScoreBoard(currentPlayer);
+       endGame(currentPlayer.marker + ' wins!!!');
 
    } else if(!isFullBoard()) {
-        game_draw = true;
-        updateScoreBoard(current_player);
+        isTie = true;
+        updateScoreBoard(currentPlayer);
         endGame(`It's a DRAW!!!`);
    }
 }
 
-function updateScoreBoard(current_player)
+function updateScoreBoard(currentPlayer)
 {
-    if (game_draw) {
+    if (isTie) {
         ties++;
-        document.getElementById("score_board_tie").innerText = ties;
+        document.getElementById("score-board__tie").innerText = ties;
     } else {
-        current_player.score++;
-        board_name = current_player == players.o ? 'score_board_o' : 'score_board_x';
-        document.getElementById(board_name).innerText = current_player.score;
+        currentPlayer.score++;
+        boardName = currentPlayer == players.o ? 'score-board__o' : 'score-board__x';
+        document.getElementById(boardName).innerText = currentPlayer.score;
     }
 }
 
-function gameWon()
+function isGameWon()
 {
-    if (moves >= min_moves) {
-        return WINNING_SET.some((combination) => {
-            if (current_player.marker == board[combination[0]]) {
-                for (let i = 0; i < board_size; i++) {
-                    if (current_player.marker != board[combination[i]])
+    if (moves >= minimumMoves) {
+        return winningSet.some((combination) => {
+            if (currentPlayer.marker == board[combination[0]]) {
+                for (let i = 0; i < boardSize; i++) {
+                    if (currentPlayer.marker != board[combination[i]])
                         return false;
                 }
                 return true;
@@ -249,38 +248,37 @@ function setGameBoard(size)
 {
     let parent = document.getElementById("game-board");
     let lastChild = parent.lastElementChild;
-    let attr_value = lastChild.getAttribute("data-cell-index");
+    let attrValue = lastChild.getAttribute("data-cell-index");
     let n = (size * size) -1;
    
-    if (attr_value === n) {
+    if (attrValue === n) {
         return;
     }
 
-    new_class = `cell-${size}`;
-    parent.classList.replace(parent.classList[1],new_class);
+    parent.classList.replace(parent.classList[1], `cell-${size}`);
 
-    if (attr_value < n) { 
+    if (attrValue < n) { 
         //add cells
-        while (attr_value < n) {
-            attr_value++;
+        while (attrValue < n) {
+            attrValue++;
 
             let node = document.createElement('div');
-            node.setAttribute("data-cell-index", attr_value);
+            node.setAttribute("data-cell-index", attrValue);
             node.setAttribute("class" , "cell");
-            node.setAttribute("id" , attr_value);
+            node.setAttribute("id" , attrValue);
             parent.appendChild(node);
         }
    
     } else {
          //remove cells
-        while (attr_value > n) {
+        while (attrValue > n) {
             parent.removeChild(parent.lastChild);
-            attr_value--;
+            attrValue--;
         }
         
     }
     
-   board_size = size;
+   boardSize = size;
    resetGame();
 }
 
@@ -293,14 +291,14 @@ function setGameBoard(size)
 function endGame(message)
 {
     cells.forEach((cell) => cell.removeEventListener('click', play));
-    let elt = document.getElementById('game_status');
+    let elt = document.getElementById('game__status');
     elt.innerText = message;
-    play_on = false;
+    playOn = false;
 }
 
 
 document.addEventListener("DOMContentLoaded", function() {
-    document.getElementById("board_option").addEventListener('change', function(evt){
+    document.getElementById("game-div__option-board").addEventListener('change', function(evt){
         let size = parseInt((evt.target.value));
         size = isNaN(size) ? 3 : size;
         setGameBoard(size);   
@@ -309,7 +307,7 @@ document.addEventListener("DOMContentLoaded", function() {
     startGame();
     cells.forEach((cell) => cell.addEventListener('click', play));
 
-    document.getElementById('restart_game').addEventListener('click', resetGame);
+    document.getElementById('game__btn-restart').addEventListener('click', resetGame);
     document.getElementById('bot').addEventListener('click', setGameMode);
     document.getElementById('human').addEventListener('click', setGameMode);
 });

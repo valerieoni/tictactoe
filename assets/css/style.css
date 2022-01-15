@@ -17,7 +17,6 @@ h1 {
     color: green;
 }
 
-
 .game {
     display: flex;
     flex-direction: column;
@@ -85,26 +84,25 @@ button {
     padding: .3125rem 0.625rem;
     border-radius: 5px;
     color: whitesmoke;
-    min-height: 3.25vh;
+    min-height: 2rem;
     text-align: center;
     box-shadow: 7px 6px 28px 1px rgba(0, 0, 0, 0.34);
 }
 
-.game_mode__button:active {
+.game-div__button:active {
     box-shadow:
       7px 6px 28px 1px rgba(0, 0, 0, 0.24);
     transform: translateY(2px);
 }
- .selected_btn  {
+ .selected-btn  {
     background-color: teal;
     box-shadow: inset 2px 2px 5px rgb(48, 47, 47);
     transform: translateY(1px);
 }
-     
- 
-.game__restart {
+      
+.game__btn-restart {
     font-size: 1.125rem;
-    height: 3.5vh;
+    height: 2.2rem;
 }
 
 
@@ -132,7 +130,7 @@ button {
     display: flex;
 }
 
-.game_div {
+.game-div {
     width: 50%;
     display: flex;
     gap: 2rem;
@@ -140,7 +138,7 @@ button {
     align-items: center;
 }
 
-.score_board p {
+.score-board p {
     display: block;
     width: 100px;
     border: teal solid 1px;
@@ -148,11 +146,11 @@ button {
     padding-top: 0.2rem;
 }
 
-.score_board__span {
+.score-board__span {
     font-weight: 600;
 }
 
-.board_option {
+.game-div__option-board {
     height: 3.5vh;
     border-radius: 5px;
     padding: .3125rem;
@@ -162,3 +160,29 @@ button {
 .win {
     color: #d367c1;
 }
+
+
+/************************************
+       SMALLER SCREEN AND MOBILE
+************************************/
+@media screen and (max-width: 500px) {
+    .flex-cols {
+        flex-direction: column;
+    }
+
+    .right-col {
+        border-left: none;
+    }
+
+    .left-col {
+        flex: 2;
+    }
+    
+
+    /** BUTTONS **/
+            
+    .game__btn-restart {
+        font-size: 1rem;
+        min-width: 6.125rem;
+    }
+  }

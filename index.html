@@ -14,14 +14,14 @@
         <h1 class="game__title">Tic Tac Toe</h1>
         <h3>Select game mode and click in an empty cell to play your turn</h3>
         <section class="flex-cols">
-            <div class="game_div left-col">
-                <button id="human" class="game_mode__button selected_btn"><i class="fas fa-user"></i> vs <i class="fas fa-user"></i></button>
-                <button id="bot" class="game_mode__button"><i class="fas fa-user"></i> vs <i class="fas fa-robot"></i></button>
+            <div class="game-div left-col">
+                <button id="human" class="game-div__button selected-btn"><i class="fas fa-user"></i> vs <i class="fas fa-user"></i></button>
+                <button id="bot" class="game-div__button"><i class="fas fa-user"></i> vs <i class="fas fa-robot"></i></button>
             </div>
-            <div class="score_board right-col">
-                <p>O : <span class="score_board__span" id="score_board_o">--</span></p>
-                <p>X : <span class="score_board__span" id="score_board_x">--</span></p>
-                <p>Ties : <span class="score_board__span" id="score_board_tie">0</span></p>
+            <div class="score-board right-col">
+                <p>O : <span class="score-board__span" id="score-board__o">--</span></p>
+                <p>X : <span class="score-board__span" id="score-board__x">--</span></p>
+                <p>Ties : <span class="score-board__span" id="score-board__tie">0</span></p>
             </div>
         </section>
         <div class="game-board  cell-3" id="game-board">
@@ -36,14 +36,14 @@
             <div data-cell-index="8" class="cell" id="8"></div>
         </div>
         
-        <h2 id="game_status" class="game__status win">Click to play</h2>
-       <div class="game_div">
-        <select id="board_option" class="board_option">
+        <h2 id="game__status" class="game__status win">Click to play</h2>
+       <div class="game-div">
+        <select id="game-div__option-board" class="game-div__option-board">
             <option value="">Board size</option>
             <option value="3">3 X 3</option>
             <option value="5">5 X 5</option>
         </select>
-        <button id="restart_game" class="game__restart"><i class="fas fa-sync-alt"></i> Restart</button>
+        <button id="game__btn-restart" class="game__btn-restart"><i class="fas fa-sync-alt"></i> Restart</button>
        </div>
     </main>
     <!-- font awesome script -->
