@@ -31,7 +31,29 @@ let ties = 0;
 
 let current_player = players.o;
 let game_draw = false;
-let play_on =  true;
+let play_on =  false;
+let vs_bot = false;
+
+/**
+ * If a game isn't already started then set the game mode
+ * and update the button to show so players know which one is on
+ */
+function setGameMode()
+{
+  let buttonClicked = this;
+  let prevMode = document.getElementsByClassName("selected_btn")[0];
+ 
+  if (play_on === false && prevMode.id != buttonClicked.id) {
+    playBot(buttonClicked.id);
+    prevMode.classList.remove("selected_btn");
+    buttonClicked.classList.add("selected_btn");
+  }
+}
+
+function playBot(which_player = 'human')
+{
+    vs_bot = which_player == 'bot';
+}
 
 /**
  * Returns a N*2+2 by N array of
@@ -84,17 +106,33 @@ function createWinningSet(grid_size)
  * Set the value on the cell to the current player if empty.
  * When player clicks on an empty cell the board is also updated.
  */
-function markCell() {
-    let div = this;
-    let idx = div.getAttribute("data-cell-index");
+function play() {
+    play_on = true;
+    let idx = this.getAttribute("data-cell-index"); 
+    markCell(idx, current_player);
+    if (vs_bot) {
+        markCell(bestMove(), current_player);
+    }
+}
+
+function markCell(idx, player)
+{
     if (board[idx] === null) {
-        board[idx] = current_player.marker;
-        div.innerText = current_player.marker;
+        document.getElementById(idx).innerText = player.marker;
+        board[idx] = player.marker;
         moves++;
         updateStatus();
-        current_player = current_player === players.o ? players.x : players.o;
-
+        current_player = player === players.o ? players.x : players.o;
     }
+    
+}
+
+/**
+ * return the first available spot on the board
+ */
+function bestMove()
+{
+    return board.indexOf(null);
 }
 
 function startGame(level = 3)
@@ -125,7 +163,7 @@ function resetGame()
     }
     document.getElementById('game_status').innerText = intro;
     cells = document.querySelectorAll('.cell');
-    cells.forEach((cell) => cell.addEventListener('click', markCell));
+    cells.forEach((cell) => cell.addEventListener('click', play));
 }
 
 function clearBoard()
@@ -145,7 +183,7 @@ function updateStatus()
        game_draw = false;
        updateScoreBoard(current_player);
        endGame(current_player.marker + ' has won!');
-      
+
    } else if(!board.some((elts) => elts === null)) {
         game_draw = true;
         updateScoreBoard(current_player);
@@ -210,6 +248,7 @@ function setBoard(size)
             let node = document.createElement('div');
             node.setAttribute("data-cell-index", attr_value);
             node.setAttribute("class" , "cell");
+            node.setAttribute("id" , attr_value);
             parent.appendChild(node);
         }
    
@@ -221,17 +260,9 @@ function setBoard(size)
         }
         
     }
-
-    //document.getElementsByTagName("H1")[0].setAttribute("class", "democlass");
     
    board_size = size;
    resetGame();
-        // <div data-cell-index="8" class="cell"></div>
-        //var x = document.getElementById("myList").lastChild.innerHTML;
-        //document.getElementById("myId").getAttribute("class");
-        //<div data-cell-index="8" class="cell"></div>
-        //game-board
-    
 }
 
 /**
@@ -242,10 +273,12 @@ function setBoard(size)
  */
 function endGame(message)
 {
-    cells.forEach((cell) => cell.removeEventListener('click', markCell));
+    cells.forEach((cell) => cell.removeEventListener('click', play));
     let elt = document.getElementById('game_status');
     elt.innerText = message;
+    play_on = false;
 }
+
 
 document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("board_option").addEventListener('change', function(evt){
@@ -255,9 +288,10 @@ document.addEventListener("DOMContentLoaded", function() {
     })
 
     startGame();
-    cells.forEach((cell) => cell.addEventListener('click', markCell));
+    cells.forEach((cell) => cell.addEventListener('click', play));
 
-    let restart_button = document.getElementById('restart_game');
-    restart_button.addEventListener('click', resetGame);
+    document.getElementById('restart_game').addEventListener('click', resetGame);
+    document.getElementById('bot').addEventListener('click', setGameMode);
+    document.getElementById('human').addEventListener('click', setGameMode);
 });
 
