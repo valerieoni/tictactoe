@@ -186,6 +186,7 @@ function resetGame()
 
 function clearGameBoard()
 {
+    playOn = false;
     cells.forEach(cell => {
         cell.innerText = '';
     });
@@ -293,7 +294,6 @@ function endGame(message)
     cells.forEach((cell) => cell.removeEventListener('click', play));
     let elt = document.getElementById('game__status');
     elt.innerText = message;
-    playOn = false;
 }
 
 
