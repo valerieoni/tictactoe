@@ -1,6 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Marko+One&display=swap');
-
 
 *, *::before, *::after {
     box-sizing: border-box;
@@ -123,7 +121,6 @@ button {
 }
 
 .right-col {
-    border-left: #ccc solid 3px;
     flex: 2;
     gap: 20px;
     justify-content: center;
@@ -172,7 +169,6 @@ button {
     }
 
     .right-col {
-        border-left: none;
         flex: auto;
     }
 

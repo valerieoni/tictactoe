@@ -33,7 +33,9 @@ let vsBot = false;
 
 /**
  * If a game isn't already started then set the game mode
- * and update the button to show so players know which one is on
+ * and update the button to show so players know which one is on.
+ * When game mode is set to bot then the player takes the first turn.
+ * X is assigned as the bot's marker while player is assigned the marker o.
  */
 function setGameMode()
 {
@@ -41,15 +43,13 @@ function setGameMode()
   let prevMode = document.getElementsByClassName("selected-btn")[0];
  
   if (playOn === false && prevMode.id != buttonClicked.id) {
-    playBot(buttonClicked.id);
+    vsBot = buttonClicked.id == 'bot';
     prevMode.classList.remove("selected-btn");
     buttonClicked.classList.add("selected-btn");
+    if (vsBot) {
+        currentPlayer = players.o;
+    }
   }
-}
-
-function playBot(whichPlayer = 'human')
-{
-    vsBot = whichPlayer == 'bot';
 }
 
 /**
@@ -159,11 +159,9 @@ function startGame(level = 3)
 
 function setWiningSet(level)
 {
-  
     if (winningSet.length !== level*2+2) {
         winningSet = createWinningSet(level);
     }
-
 }
 
 function fillBoard(size)
