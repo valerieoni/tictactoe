@@ -16,13 +16,11 @@ let cells = document.querySelectorAll('.cell');
 let players = {
     x : {
         marker: 'X',
-        score: 0,
-        moves: []
+        score: 0
     },
     o : {
         marker: 'O',
-        score: 0,
-        moves: []
+        score: 0
     }
 }
 let ties = 0;
