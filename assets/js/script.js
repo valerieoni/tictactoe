@@ -221,7 +221,7 @@ function resetGame()
     } else {
         startGame(boardSize);
     }
-    document.getElementById('game__status').innerHTML = `${intro} <span>${currentPlayer.marker}</span>`; 
+    document.getElementById('game__status').innerHTML = `${intro} <span id="turn">${currentPlayer.marker}</span>`; 
     cells = document.querySelectorAll('.cell');
     cells.forEach((cell) => cell.addEventListener('click', play));
     clearGameBoard();
