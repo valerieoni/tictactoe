@@ -1,4 +1,4 @@
-let intro = "Click to play";
+let intro = "Who's playing next?";
 let board;
 let boardSize = 0;
 let boardName = '';
@@ -16,11 +16,13 @@ let cells = document.querySelectorAll('.cell');
 let players = {
     x : {
         marker: 'X',
-        score: 0
+        score: 0,
+        color: 'red'
     },
     o : {
         marker: 'O',
-        score: 0
+        score: 0,
+        color: 'blue'
     }
 }
 let ties = 0;
@@ -110,20 +112,45 @@ function play() {
     }
 }
 
+/**
+ * Updates board to display the marker of the player passed 
+ * in the given the location (idx) on the board.
+ * It also updates game status so player knows whose turn it is to play next.
+ * 
+ * @param {int} idx position on the board e.g 0 - 9 for a 3X3 board
+ * @param {object} player 
+ */
 function markCell(idx, player)
 {
-    if (isFullBoard()) {
-        document.getElementById(idx).innerText = player.marker;
+    if (!isFullBoard()) {
+        updateGameBoard(idx, player);
         board[idx] = player.marker;
         moves++;
         updateStatus();
         currentPlayer = player === players.o ? players.x : players.o;
+        updateTurn();
     }
     
 }
 
+function updateGameBoard(idx, player)
+{
+    let selectedSquare = document.getElementById(idx);
+    selectedSquare.innerText = player.marker;
+    selectedSquare.style.color = player.color;
+}
+
+function updateTurn()
+{
+    let turn = document.getElementById("turn");
+
+    if (null !== turn) {
+        turn.innerText = currentPlayer.marker;
+    }
+}
+
 /**
- * returns a random spot from the available spots on the board
+ * returns a random index from the available squares on the board
  */
 function bestMove()
 {
@@ -132,11 +159,23 @@ function bestMove()
 
 }
 
+/**
+ * Returns a boolean to indicate whether or not all squares on the board have been marked.
+ *
+ * @returns boolean
+ */
 function isFullBoard()
 {
-    return getEmptySquares().length != 0;
+    return getEmptySquares().length === 0;
 }
 
+/**
+ * Returns an array of all empty squares on the board.
+ * A board has no empty square if it's value is a number
+ * cos the markers used to updated the board are X and O which are both string.
+ * 
+ * @returns array
+ */
 function getEmptySquares()
 {
     return board.filter(elt => typeof elt == 'number');
@@ -144,7 +183,7 @@ function getEmptySquares()
 
 /**
  * 
- * @param {*} level 
+ * @param {int} level 
  */
 function startGame(level = 3)
 {
@@ -155,6 +194,10 @@ function startGame(level = 3)
    clearGameBoard();
 }
 
+/**
+ * 
+ * @param {int} level 
+ */
 function setWiningSet(level)
 {
     if (winningSet.length !== level*2+2) {
@@ -162,6 +205,10 @@ function setWiningSet(level)
     }
 }
 
+/**
+ * 
+ * @param {int} size 
+ */
 function fillBoard(size)
 {
     board = Array.from(Array(size).keys());
@@ -174,7 +221,7 @@ function resetGame()
     } else {
         startGame(boardSize);
     }
-    document.getElementById('game__status').innerText = intro;
+    document.getElementById('game__status').innerHTML = `${intro} <span>${currentPlayer.marker}</span>`; 
     cells = document.querySelectorAll('.cell');
     cells.forEach((cell) => cell.addEventListener('click', play));
     clearGameBoard();
@@ -199,7 +246,7 @@ function updateStatus()
        updateScoreBoard(currentPlayer);
        endGame(currentPlayer.marker + ' wins!!!');
 
-   } else if(!isFullBoard()) {
+   } else if(isFullBoard()) {
         isTie = true;
         updateScoreBoard(currentPlayer);
         endGame(`It's a DRAW!!!`);
