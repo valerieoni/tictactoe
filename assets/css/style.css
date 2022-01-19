@@ -90,7 +90,6 @@ h1 {
 ************************************************/
 button {
     border: none;
-    /*background-color: rgba(0, 128, 128, 0.919);*/
     background-color: #30638E;
     cursor: pointer;
     padding: .3125rem 0.625rem;
@@ -107,7 +106,6 @@ button {
     transform: translateY(2px);
 }
  .selected-btn  {
-    /*background-color: teal;*/
     background-color: #003D5B;
     box-shadow: inset 2px 2px 5px rgb(48, 47, 47);
     transform: translateY(1px);

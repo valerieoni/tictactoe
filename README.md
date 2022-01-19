@@ -2,7 +2,7 @@
 
 [View the live project here.](https://valerieoni.github.io/tictactoe/)
 
-The site provides a simple tic tac toe game played between two players on a 3 X 3 or 5 X 5 grid.
+This is a one page site which displays a simple tic tac toe game to be played between two players on a 3 X 3 or 5 X 5 board.
 
 <h2 align="center"><img src="docs/screenshot.png"></h2>
 
@@ -15,20 +15,20 @@ The site provides a simple tic tac toe game played between two players on a 3 X 
         As a First Time Visitor, I want to:
         - I want to understand the site's main purpose and find out what features it provides
         - Easily navigate the pages
-        - Understand how to play
+        - Play a simple tic tac toe game
 
     -   #### Returning Visitor Goals
 
         As a Returning Visitor, I want to:
         -  Play a simple web-based tic-tac-toe game
-        -  Explore a different grid size
+        -  Explore a different board size
 
     -   #### Frequent Visitor Goals
 
         As a frequent Visitor, I want to:
         -  Play tic tac toe with a friend or against a bot
         -  Play the game in turns
-        -  have my marker symbol drawn when I click inside an empty cell
+        -  have my marker symbol drawn when I click inside an empty square
         -  know when I have won, lost or drawn the game
         -  restart the game when one ends
         -  play a tic tac toe game on a 3X3 or 5X5 board.
@@ -36,10 +36,13 @@ The site provides a simple tic tac toe game played between two players on a 3 X 
 -   ### Design
 
     -   #### Colour Scheme
-        -   The main colors chosen are teal, pink and grey.
+        The main colors chosen are shades of green and blue.
+        - Spring green was used for the title to make it stand out.
+        - The blue colors used for the buttons are astranaut blue (#003D5B) and denim (#30638E).
+        - The X's and O's text on the board are red and blue.
 
     -   #### Typography
-        -   The Montserrat font is the main font used throughout the whole website with Sans Serif as the fallback font in case for any reason the font isn't being imported into the site correctly. Montserrat is a clean font used frequently in programming, so it is both attractive and appropriate.
+        -   Arial is the font used for all text aside from the markers on the board. So that the text stands out and feel like one is actually marking a spot on the board the permanent marker font has been used for the X's and O's on the board.
 
 *   ### Wireframes
     The wireframes for this project are:
@@ -77,13 +80,20 @@ The site provides a simple tic tac toe game played between two players on a 3 X 
     - GitHub is used to store the projects code after being pushed from Git.
 3. [Balsamiq:](https://balsamiq.com/)
     - Balsamiq was used to create the wireframes during the design process.
+4. [Font Awesome:](https://fontawesome.com/)
+    - Font Awesome was used on the buttons for asthetics reasons.
+5. [Google Font](https://fonts.google.com/)
+    - Permanent marker which is the font used for the markers on the board was imported from google font.
+
 
 ## Testing
 
-The W3C Markup Validator and W3C CSS Validator Services were used to validate every page of the project to ensure there were no syntax errors in the project.
+The W3C Markup Validator and W3C CSS Validator Services were used to validate the project to ensure there were no syntax errors in the project.
+Issues found while testing were fixed and the pages revalidated.
 
 -   [W3C Markup Validator](https://jigsaw.w3.org/css-validator/#validate_by_input) - [Results](https://github.com/)
 -   [W3C CSS Validator](https://jigsaw.w3.org/css-validator/#validate_by_input) - [Results](https://github.com/)
+    
 
 ### Testing User Stories from User Experience (UX) Section
 
@@ -93,7 +103,7 @@ The W3C Markup Validator and W3C CSS Validator Services were used to validate ev
 
     2. As a First Time Visitor, I want to easily navigate the pages
 
-    3. As a First Time Visitor, I want to understand how to play
+    3. As a First Time Visitor, I want to play a simple tic tac toe game
 
 
 -   #### Returning Visitor Goals
@@ -105,13 +115,21 @@ The W3C Markup Validator and W3C CSS Validator Services were used to validate ev
 
 ### Further Testing 
 
--   The Website will be tested on Google Chrome, Internet Explorer, Microsoft Edge and Safari browsers.
+-   The Website was be tested on Google Chrome and Microsoft Edge
 -   The website will be viewed on a variety of devices such as Desktop, Laptop, iPhone7, iPhone 8 & iPhoneX.
--   A large amount of testing will be done to ensure that all pages were linking correctly.
+-   Lighthouse test was carried out for both desktop mobile devices in incognito mode and the result of the test shown below.
+    #### Desktop device test
+    <div align="center"><img src="docs/testing/lighthouse_test_desktop.png"></div>
+
+     #### Mobile device test
+    <div align="center"><img src="docs/testing/lighthouse_test_mobile.png"></div>
 
 ### Known Bugs
-- When I click restart button before a current game ends, the click event on the game mode buttons aren't triggered when clicked.
- [Click to view ticket](https://github.com/valerieoni/tictactoe/issues/1#issue-1104767504)
+- [Issue raised](https://github.com/valerieoni/tictactoe/issues/1#issue-1104767504) - When I click restart button before a current game ends, the click event on the game mode buttons aren't triggered when clicked.
+  I branched off master to fix this issue and created a pull request which was linked to the issue. The issue was closed upon merging the pull request into master branch.
+
+### Future Enhancement
+- Make the game play with bot more challenging - Currently the computer randomly picks a spot on the board to play. This can be improved upon by implenting the minimax algorithm. As the board can be either 3X3 or 5X5 and the alogirthm is a recursive algorithm I would need to look at the performance and how it can be optimised if need be.
 
 ## Deployment
 
@@ -171,6 +189,6 @@ $ git clone https://github.com/valerieoni/tictactoe
 
 ### Acknowledgements
 
--   My Mentor for continuous helpful feedback.
+-   My Mentor, Narender Singh for continuous support and great feedback.
 
 -   Tutor support at Code Institute for their support.
