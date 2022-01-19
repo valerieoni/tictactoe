@@ -13,8 +13,8 @@
 <body>
     <main class="game">
         <h1 class="game__title">Tic Tac Toe</h1>
-        <h3>Select game mode and click in an empty cell to play your turn</h3>
-        <section class="flex-cols">
+        <h2>Select game mode and click in an empty cell to play your turn</h2>
+        <div class="flex-cols">
             <div class="game-div left-col">
                 <button id="human" class="game-div__button selected-btn"><i class="fas fa-user"></i> vs <i class="fas fa-user"></i></button>
                 <button id="bot" class="game-div__button"><i class="fas fa-user"></i> vs <i class="fas fa-robot"></i></button>
@@ -24,7 +24,7 @@
                 <p>X : <span class="score-board__span" id="score-board__x">--</span></p>
                 <p>Ties : <span class="score-board__span" id="score-board__tie">0</span></p>
             </div>
-        </section>
+        </div>
         <div class="game-board  cell-3" id="game-board">
             <div data-cell-index="0" class="cell" id="0"></div>
             <div data-cell-index="1" class="cell" id="1"></div>
@@ -37,7 +37,7 @@
             <div data-cell-index="8" class="cell" id="8"></div>
         </div>
         
-        <h2 id="game__status" class="game__status win">Click to play</h2>
+        <p id="game__status" class="game__status">Who's playing next? <span id="turn">O</span></p>
        <div class="game-div">
         <select id="game-div__option-board" class="game-div__option-board">
             <option value="">Board size</option>

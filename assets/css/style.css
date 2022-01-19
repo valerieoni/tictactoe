@@ -72,17 +72,30 @@ h1 {
     border-bottom: none;
 }
 
+.game__status {
+    font-size: 1.25em;
+    font-weight:500;
+    letter-spacing: 0.05em;
+    color: #770364;
+}
+
+.game__status span {
+    text-decoration: underline;
+    font-weight: 600;
+    color: #000;
+}
 
 /************************************************
         BUTTONS
 ************************************************/
 button {
     border: none;
-    background-color: rgba(0, 128, 128, 0.919);
+    /*background-color: rgba(0, 128, 128, 0.919);*/
+    background-color: #30638E;
     cursor: pointer;
     padding: .3125rem 0.625rem;
     border-radius: 5px;
-    color: whitesmoke;
+    color: #ffffff;
     min-height: 2rem;
     text-align: center;
     box-shadow: 7px 6px 28px 1px rgba(0, 0, 0, 0.34);
@@ -94,7 +107,8 @@ button {
     transform: translateY(2px);
 }
  .selected-btn  {
-    background-color: teal;
+    /*background-color: teal;*/
+    background-color: #003D5B;
     box-shadow: inset 2px 2px 5px rgb(48, 47, 47);
     transform: translateY(1px);
 }
@@ -153,10 +167,6 @@ button {
     border-radius: 5px;
     padding: .3125rem;
     border: teal solid 1px;
-}
-
-.win {
-    color: #d367c1;
 }
 
 
