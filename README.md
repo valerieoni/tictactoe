@@ -14,7 +14,6 @@ This is a one page site which displays a simple tic tac toe game to be played be
 
         As a First Time Visitor, I want to:
         - I want to understand the site's main purpose and find out what features it provides
-        - Easily navigate the pages
         - Play a simple tic tac toe game
 
     -   #### Returning Visitor Goals
@@ -84,6 +83,8 @@ This is a one page site which displays a simple tic tac toe game to be played be
     - Font Awesome was used on the buttons for asthetics reasons.
 5. [Google Font](https://fonts.google.com/)
     - Permanent marker which is the font used for the markers on the board was imported from google font.
+6. [AM I RESPONSIVE](http://ami.responsivedesign.is/)
+    - used to show off the responsive design across the different devices.
 
 
 ## Testing
@@ -91,26 +92,25 @@ This is a one page site which displays a simple tic tac toe game to be played be
 The W3C Markup Validator and W3C CSS Validator Services were used to validate the project to ensure there were no syntax errors in the project.
 Issues found while testing were fixed and the pages revalidated.
 
--   [W3C Markup Validator](https://jigsaw.w3.org/css-validator/#validate_by_input) - [Results](https://github.com/)
--   [W3C CSS Validator](https://jigsaw.w3.org/css-validator/#validate_by_input) - [Results](https://github.com/)
+-   [W3C Markup Validator](https://validator.w3.org/)
+-   [W3C CSS Validator](https://jigsaw.w3.org/css-validator/#validate_by_input)
     
 
 ### Testing User Stories from User Experience (UX) Section
 
 -   #### First Time Visitor Goals
 
-    1. As a First Time Visitor, I want to understand the site's main purpose and find out what features it provides.
+    - As a First Time Visitor, I want to understand the site's main purpose and find out what features it provides.
+      The tic tac toe board is clearly visible on the page
 
-    2. As a First Time Visitor, I want to easily navigate the pages
-
-    3. As a First Time Visitor, I want to play a simple tic tac toe game
-
+    - As a First Time Visitor, I want to play a simple tic tac toe game
+      Upon opening the page user is presented with a the information to click in any of the sqaure to play.
+      
 
 -   #### Returning Visitor Goals
 
-    1. As a Returning Visitor, I want to play a simple web-based game.
-
-    2. As a Returning Visitor, I want to other features of the site.
+    1. As a Returning Visitor, I want to play a simple web-based game of tic tac toe.
+       User can click on the square to start playing the game
       
 
 ### Further Testing 
@@ -129,7 +129,8 @@ Issues found while testing were fixed and the pages revalidated.
   I branched off master to fix this issue and created a pull request which was linked to the issue. The issue was closed upon merging the pull request into master branch.
 
 ### Future Enhancement
-- Make the game play with bot more challenging - Currently the computer randomly picks a spot on the board to play. This can be improved upon by implenting the minimax algorithm. As the board can be either 3X3 or 5X5 and the alogirthm is a recursive algorithm I would need to look at the performance and how it can be optimised if need be.
+- Add an how to play button and how to play content.
+- Make the game play with bot more challenging - Currently the computer randomly picks a spot on the board to play. This can be improved upon by implenting the minimax algorithm. 
 
 ## Deployment
 
@@ -184,7 +185,7 @@ $ git clone https://github.com/valerieoni/tictactoe
 
 ### Media
 
--   All images used were sourced from:
+-   The icon used for this project is sourced from [Icon finder](https://www.iconfinder.com/search?q=tic%20tac%20toe)
 
 
 ### Acknowledgements
