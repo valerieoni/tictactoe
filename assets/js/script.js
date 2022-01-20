@@ -10,7 +10,7 @@ let winningSet = [];
  * e.g 4 X 4 board requires a minimum of 7 moves.
  */
 let minimumMoves = (boardSize * 2) - 1;
-let moves = 0;
+let totalMovesByPlayers = 0;
 let cells = document.querySelectorAll('.cell');
 
 let players = {
@@ -24,7 +24,8 @@ let players = {
         score: 0,
         color: 'blue'
     }
-}
+};
+
 let ties = 0;
 let currentPlayer = players.o;
 let isTie = false;
@@ -56,7 +57,14 @@ function setGameMode()
  * Returns a N*2+2 by N array of
  * the possible winning sets for a given grid size of N.
  * For example: 
- * Given a grid size of 3 it returns an 8 by 3 multi-dimensional array.
+ * Given a grid size of 3 it returns an 8 by 3 multi-dimensional array
+ * [[0, 1, 2], [3, 4, 5], [6, 7, 8],
+ * [0, 3, 6], [1, 4, 7], [2, 5, 8], 
+ * [0, 4, 8], [2, 4, 6]]
+ * 
+ * - create the horizontal array set for a 3 X3 that would be [0, 1, 2], [3, 4, 5], [6, 7, 8]
+ * - given the first array which is the gorizontal array created, transpose that to get the next set, [0, 3, 6], [1, 4, 7], [2, 5, 8]
+ * - get the diagonals from the first array ([0, 1, 2], [3, 4, 5], [6, 7, 8]) which will result to [0, 4, 8], [2, 4, 6]
  *
  * @param int gridSize
  * @returns [][]
@@ -66,7 +74,7 @@ function createWinningSet(gridSize)
     let arrayGrid = [];
     let row;
     
-    //first possible set WA. This is named WA just for reference in the comments.
+    //first set of arrayGrid. This is named WA just for reference in the comments.
     for (let i = 0; i<gridSize; i++) {
         arrayGrid[i] = [];
         for (let j=0; j<gridSize; j++) {
@@ -125,10 +133,10 @@ function markCell(idx, player)
     if (!isFullBoard()) {
         updateGameBoard(idx, player);
         board[idx] = player.marker;
-        moves++;
+        totalMovesByPlayers++;
         updateStatus();
         currentPlayer = player === players.o ? players.x : players.o;
-        updateTurn();
+        toggleTurn();
     }
     
 }
@@ -140,7 +148,7 @@ function updateGameBoard(idx, player)
     selectedSquare.style.color = player.color;
 }
 
-function updateTurn()
+function toggleTurn()
 {
     let turn = document.getElementById("turn");
 
@@ -189,7 +197,7 @@ function startGame(level = 3)
 {
     setWiningSet(level);
     boardSize = level;
-    let size = boardSize ** 2;
+    let size = getTotalSquares(boardSize);
     fillBoard(size);
    clearGameBoard();
 }
@@ -214,10 +222,25 @@ function fillBoard(size)
     board = Array.from(Array(size).keys());
 }
 
+/**
+ * Given a grid which is an integer value
+ * return total squares expected on the board which is double the value passed in.
+ * For example a 3 X 3 grid the expected input value is 3 and
+ * expected result is 9
+ *
+ * @param {int} grid 
+ * @returns int
+ */
+function getTotalSquares(grid)
+{
+    return grid * grid;
+}
+
 function resetGame()
 {
-    if (Array.isArray(board) && board.length === boardSize ** 2) {
-        fillBoard(boardSize ** 2);
+    let totalSquares = getTotalSquares(boardSize);
+    if (Array.isArray(board) && board.length === totalSquares) {
+        fillBoard(totalSquares);
     } else {
         startGame(boardSize);
     }
@@ -265,20 +288,31 @@ function updateScoreBoard(currentPlayer)
     }
 }
 
+/**
+ * Checks enough moves have been made for a possible win to occur, if not then returns false.
+ * E.g for a 3x3 board both players combined must have made at least 5 moves for the game to be won.
+ * - If the total moves by both players is less than minimum moves in the case of a 3X3 board
+ *   that would be 5 it returns false otherwise it checks if a winning match has been found and returns true | false.
+ * - returns false if current player has not marked the first index.
+ * 
+ * @returns boolean
+ */
 function isGameWon()
 {
-    if (moves >= minimumMoves) {
-        return winningSet.some((combination) => {
-            if (currentPlayer.marker == board[combination[0]]) {
-                for (let i = 0; i < boardSize; i++) {
-                    if (currentPlayer.marker != board[combination[i]])
-                        return false;
-                }
-                return true;
-            }
-            return false;
-        });
+    if (totalMovesByPlayers < minimumMoves) {
+        return false;
     }
+    return winningSet.some((combination) => {
+        if (currentPlayer.marker !== board[combination[0]]) {
+            return false;
+        }
+        for (let i = 0; i < boardSize; i++) {
+            if (currentPlayer.marker != board[combination[i]])
+                return false;
+        }
+        return true;
+    });
+    
 }
 
 /**
@@ -345,7 +379,7 @@ document.addEventListener("DOMContentLoaded", function() {
         let size = parseInt((evt.target.value));
         size = isNaN(size) ? 3 : size;
         setGameBoard(size);   
-    })
+    });
 
     startGame();
     cells.forEach((cell) => cell.addEventListener('click', play));
@@ -354,4 +388,3 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById('bot').addEventListener('click', setGameMode);
     document.getElementById('human').addEventListener('click', setGameMode);
 });
-
