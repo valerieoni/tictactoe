@@ -1,7 +1,5 @@
 <h1 align="center">TIC TAC TOE</h1>
 
-[View the live project here.](https://valerieoni.github.io/tictactoe/)
-
 This is a one page site which displays a simple tic tac toe game to be played between two players on a 3 X 3 or 5 X 5 board.
 
 <h2 align="center"><img src="docs/screenshot.png"></h2>
